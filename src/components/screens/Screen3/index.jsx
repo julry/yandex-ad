@@ -132,8 +132,24 @@ const SkewedWrapperStyled = styled(SkewedWrapper)`
 const Description = styled(Text)`
   position: relative;
   z-index: 3;
+  white-space: pre-line;
   transform: scale(-1, 1);
-  margin: min(4.5vw, 17px) min(5.3vw, 20px) min(5.3vw, 20px);
+  margin: min(4.5vw, 17px) min(6.3vw, 30px) min(5.3vw, 20px) min(5.3vw, 20px);
+  
+  @media screen and (min-width: 380px) {
+    max-width: 223px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  
+  @media screen and (min-width: 540px) {
+    white-space: unset;
+    max-width: none;
+  }
+  
+  @media screen and (min-width: 640px) {
+    margin-left: 30px;
+  }
 `;
 
 const ButtonStyled = styled(Button)`
