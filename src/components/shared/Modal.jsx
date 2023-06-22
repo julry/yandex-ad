@@ -82,7 +82,7 @@ export const Modal = (props) => {
     };
 
     useEffect(() => {
-        if (props.isClosing !== isClosing) setIsClosing(props.isClosing);
+        if (props.isClosing !== undefined && props.isClosing !== isClosing) setIsClosing(props.isClosing);
     }, [props.isClosing, isClosing]);
 
     return (
