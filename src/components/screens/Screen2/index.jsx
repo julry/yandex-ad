@@ -37,10 +37,15 @@ const Title = styled.p`
 
 const ButtonStyled = styled(Button)`
   margin: 0 auto;
+  
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 
 const ModalStyled = styled(Modal)`
-    padding: min(9.6vw, 36px) min(5.6vw, 21px) min(9.6vw, 36px) min(6.4vw, 24px);
+  white-space: pre-line;
+  padding: min(9.6vw, 36px) min(5.6vw, 21px) min(9.6vw, 36px) min(6.4vw, 24px);
 `;
 
 export const Screen2 = () => {
@@ -63,7 +68,7 @@ export const Screen2 = () => {
                     <b>{'Раскроем первый секрет: \n'}</b>
                     {
                         'зарплату выше 250 тысяч предлагают редко, и в основном специалистам с ' +
-                        'опытом более 10 лет. Попробуй ввести число немного поменьше! 🙁'
+                        'опытом более 10 лет. Попробуй ввести число немного меньше! 🙁'
                     }
                 </>
             );
@@ -105,7 +110,12 @@ export const Screen2 = () => {
                     onChangeSalary={handleChangeSalary}
                     setExp={setExp}
                 />
-                <ButtonStyled onClick={handleNext}>Посмотреть результат</ButtonStyled>
+                <ButtonStyled
+                    onClick={handleNext}
+                    disabled={!salary || !experience}
+                >
+                    Посмотреть результат
+                </ButtonStyled>
             </Wrapper>
             {modal.shown && (
                 <ModalStyled

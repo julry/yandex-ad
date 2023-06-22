@@ -168,6 +168,10 @@ const CloseBtn = styled.div`
   }
 `;
 
+const Link = styled.a`
+    color: inherit;
+`;
+
 export const FormModal = ({onClose}) => {
     const [name, setName] = useState('');
     const [data, setData] = useState('');
@@ -240,7 +244,10 @@ export const FormModal = ({onClose}) => {
                     onChange={handleAgree}
                     disabled={isSend}
                 >
-                    Я согласен(а) на обработку персональных данных и получение информационных сообщений
+                    <span>
+                        Я согласен(а) на <Link href={'https://fut.ru/personal_data_policy/'} target="_blank">
+                        обработку персональных данных</Link> {'\n'}и получение информационных сообщений
+                    </span>
                 </RadioButtonStyled>
             </Content>
             <CloseBtn onClick={handleClose}/>

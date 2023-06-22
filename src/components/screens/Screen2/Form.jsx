@@ -63,11 +63,11 @@ export const Form = (props) => {
             <RadioButton
                 type="radio"
                 name="exp"
-                onChange={() => setExp('от 3 лет и более')}
+                onChange={() => setExp('от 3 лет')}
             >
-                <MediumText>от 3 лет и более</MediumText>
+                <MediumText>от 3 лет</MediumText>
             </RadioButton>
-            <Label>Укажи свои зарплатные ожидания <Note>(руб)</Note></Label>
+            <Label>Укажи свои зарплатные ожидания <Note>(руб.)</Note></Label>
             <InputStyled
                 placeholder={'50 000'}
                 value={salary}

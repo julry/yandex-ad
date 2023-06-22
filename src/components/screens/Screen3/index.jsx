@@ -108,6 +108,13 @@ const Salary = styled.p`
 const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-end;
   padding-right: 24px;
+
+  @media screen and (min-width: 380px) {
+    & ${Text} {
+      font-size: 16px;
+      max-width: 225px;
+    }
+  }
 `;
 
 const RangeText = styled(Text)`
@@ -175,6 +182,7 @@ export const Screen3 = () => {
     const [modal, setModal] = useState({shown: true, type: MODAL_TYPES.rules});
     const { salary } = useProgress();
     const [value, setValue] = useState();
+    const [formShown, setFormShown] = useState(false);
     const [currentRange, setCurrentRange] = useState({});
     const $timerRef = useRef();
 
@@ -210,9 +218,10 @@ export const Screen3 = () => {
         }
         if (valueRange) {
             if (valueRange.minM === 80 ) {
-                if (!$timerRef?.current && !modal?.shown) {
+                if (!$timerRef?.current && !modal?.shown && !formShown) {
                     $timerRef.current = setTimeout(() => {
                         setModal({shown: true, type: MODAL_TYPES.form});
+                        setFormShown(true);
                     }, 5000);
                 }
             } else {
@@ -221,7 +230,7 @@ export const Screen3 = () => {
             }
             setCurrentRange(valueRange);
         }
-    }, [value, salary, modal.shown]);
+    }, [value, salary, modal.shown, formShown]);
 
     return (
         <>
