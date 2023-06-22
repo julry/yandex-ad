@@ -2,7 +2,7 @@ import { screens } from '../constants/screens.config';
 import { useState } from 'react';
 
 const INITIAL_NAME = '';
-const INITIAL_SALARY = '50000';
+const INITIAL_SALARY = '84000';
 const INITIAL_EXP = 0;
 
 const INITIAL_PROGRESS = {

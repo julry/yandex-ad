@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { SkewedWrapper } from './SkewedWrapper';
 import { FlexWrapper } from './FlexWrapper';
 import { Button } from './Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Wrapper = styled(FlexWrapper)`
   position: absolute;
@@ -55,6 +55,10 @@ const ModalWrapper = styled(SkewedWrapper)`
   z-index: 4;
   max-width: min(94.5946vw, 365px);
   animation: ${({$isClosing}) => $isClosing ? disappear : appear} 0.35s ease-in both;
+  
+  &::after {
+    transform: skew(0, ${({$skewDeg}) => ($skewDeg ?? '5.5') + 'deg'});
+  }
 `;
 
 const ModalText = styled.div`
@@ -75,11 +79,16 @@ export const Modal = (props) => {
     const handleClick = () => {
         setIsClosing(true);
         setTimeout(() => props.onClose(), 350);
-    }
+    };
+
+    useEffect(() => {
+        if (props.isClosing !== isClosing) setIsClosing(props.isClosing);
+    }, [props.isClosing, isClosing]);
+
     return (
         <Wrapper>
             <Background />
-            <ModalWrapper className={props.className} $isClosing={isClosing}>
+            <ModalWrapper className={props.className} $isClosing={isClosing} $skewDeg={props.skewDeg}>
                 <ModalText>
                     {props.children}
                 </ModalText>

@@ -58,6 +58,7 @@ const SendBtn = styled.button`
   width: 39px;
   margin-left: 10px;
   transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
   
   &:disabled {
     background-color: #D3DCEE;
@@ -66,7 +67,7 @@ const SendBtn = styled.button`
 
 const RadioButtonStyled = styled(RadioButton)`
   font-size: min(3.2vw, 12px);
-  align-items: flex-start;
+  align-items: flex-start !important;
   color: #919DB7;
 
   & div {
@@ -132,9 +133,45 @@ const SendText = styled.p`
   }
 `;
 
+const CloseBtn = styled.div`
+  position: absolute;
+  top: min(4.5vw, 17px);
+  right: min(4.5vw, 17px);
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    background-color: #D9D9D9;
+    display: inline-block;
+    width: 3px;
+    height: 24px;
+    right: 7px;
+    top: 0;
+    transform: rotate(-45deg);
+    border-radius: 2px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: #D9D9D9;
+    display: inline-block;
+    width: 3px;
+    height: 24px;
+    left: 7px;
+    top: 0;
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+`;
+
 export const FormModal = ({onClose}) => {
     const [name, setName] = useState('');
     const [data, setData] = useState('');
+    const [isClosing, setIsClosing] = useState(false);
     const { progress } = useProgress();
     const { salary, experience, id } = progress;
     const [isSending, setIsSending] = useState(false);
@@ -148,6 +185,11 @@ export const FormModal = ({onClose}) => {
         if (!result.error) setIsSend(true);
     }
 
+    const handleClose = () => {
+        setIsClosing(true);
+        setTimeout(() => onClose(), 350);
+    }
+
     const handleAgree = () => {
         if (isSend) return;
 
@@ -155,7 +197,12 @@ export const FormModal = ({onClose}) => {
     };
 
     return (
-        <Modal btnText={'К вакансиям!'} btnStyle={'top: 106%; left: min(6.13vw, 23px);'} onClose={onClose}>
+        <Modal
+            btnText={'К вакансиям!'}
+            btnStyle={'top: 106%; left: min(6.13vw, 23px);'}
+            onClose={() => {}}
+            isClosing={isClosing}
+        >
             <Content>
                 <MediumText>
                     <b>
@@ -191,10 +238,12 @@ export const FormModal = ({onClose}) => {
                     type="checkbox"
                     value={isAgreed}
                     onChange={handleAgree}
+                    disabled={isSend}
                 >
                     Я согласен(а) на обработку персональных данных и получение информационных сообщений
                 </RadioButtonStyled>
             </Content>
+            <CloseBtn onClick={handleClose}/>
         </Modal>
     )
 }

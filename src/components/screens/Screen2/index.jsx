@@ -73,10 +73,10 @@ export const Screen2 = () => {
             return;
         }
 
-        if (+sal < 16242) {
-            const content = () => 'МРОТ на 2023 год — 16 242 рубля.\n Бери сумму выше!';
+        if (+sal < 40000) {
+            const content = () => 'Бери сумму выше!';
 
-            setModal({shown: true, content, btnStyle: `top: 83%; left: min(6.4vw, 24px);`});
+            setModal({shown: true, content, btnStyle: `top: 83%; left: min(6.4vw, 24px);`, skewDeg: '2.5'});
 
             return;
         }
@@ -112,6 +112,7 @@ export const Screen2 = () => {
                     btnText={'Хорошо'}
                     onClose={() => setModal({shown: false, content: () => {}, btnStyle: ''})}
                     btnStyle={modal.btnStyle}
+                    skewDeg={modal?.skewDeg}
                 >
                     <MediumText>
                         {modal.content()}

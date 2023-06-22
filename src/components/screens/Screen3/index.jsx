@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ReactSlider from 'react-slider'
 import { FlexWrapper } from '../../shared/FlexWrapper';
 import arrow from '../../../static/images/arrowBlue.svg';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { RulesModal } from './RulesModal';
 import { FormModal } from './FormModal';
 import { useProgress } from '../../../hooks/useProgress';
@@ -36,20 +36,24 @@ const Slider = styled(ReactSlider)`
   }
 `;
 
+const ThumbWrapper = styled.div`
+  padding: 0 15px;
+  left: -22px;
+  outline: none;
+`;
+
 const Thumb = styled.div`
   height: 7px;
   width: 28px;
   background: #FFEC42;
   background: linear-gradient(170.39deg, #FFB800 -15.52%, #FFEC42 108.44%);
   border-radius: 20px;
-  left: -7px;
-  outline: none;
 `;
 
 const Mark = styled.span`
   width: 100%;
   height: 3px;
-  background: ${({ k }) => k === 133000 ? '#D3DCEE' : '#919DB7'};
+  background: ${({ k }) => k === 124000 ? '#D3DCEE' : '#919DB7'};
 `;
 
 const SliderWrapper = styled.div`
@@ -156,6 +160,7 @@ export const Screen3 = () => {
     const { salary } = useProgress();
     const [value, setValue] = useState();
     const [currentRange, setCurrentRange] = useState({});
+    const $timerRef = useRef();
 
     const handleCloseModal = () => {
         setModal({shown: false, type: ''});
@@ -170,7 +175,6 @@ export const Screen3 = () => {
     const getSalaryDisplayed = useCallback(() => {
         if (!value) return +salary;
         let salaryValue = value / 1000;
-        if (salaryValue === ranges[4].minS) return 16242;
         const valueRange = ranges.find(range => salaryValue <= range.maxS && salaryValue >= range.minS);
         if (valueRange) {
             salaryValue = (valueRange.minM + (salaryValue - valueRange.minS) * (1 / valueRange.k));
@@ -189,9 +193,19 @@ export const Screen3 = () => {
             valueRange = ranges.find(range => salaryValue <= range.maxM && salaryValue >= range.minM);
         }
         if (valueRange) {
+            if (valueRange.minM === 80 ) {
+                if (!$timerRef?.current && !modal?.shown) {
+                    $timerRef.current = setTimeout(() => {
+                        setModal({shown: true, type: MODAL_TYPES.form});
+                    }, 5000);
+                }
+            } else {
+                 clearTimeout($timerRef.current);
+                 $timerRef.current = null;
+            }
             setCurrentRange(valueRange);
         }
-    }, [value, salary]);
+    }, [value, salary, modal.shown]);
 
     return (
         <>
@@ -202,7 +216,11 @@ export const Screen3 = () => {
                         <RangeText>250 тыс.</RangeText>
                         <Slider
                             defaultValue={getSalary()}
-                            renderThumb={(props, state) => <Thumb {...props} {...state}/>}
+                            renderThumb={(props, state) => (
+                                <ThumbWrapper {...props} {...state}>
+                                    <Thumb />
+                                </ThumbWrapper>
+                            )}
                             renderMark={(props) => (
                                 <Mark k={props.key} {...props}>
                                     <MarkText k={props.key}>{KEYS_TO_TEXT[props.key]}</MarkText>
@@ -210,13 +228,13 @@ export const Screen3 = () => {
                             )}
                             orientation="vertical"
                             onChange={(v) => setValue(v)}
-                            marks={[48000, 105000, 133000, 162000, 219000]}
+                            marks={[93000, 124000, 150000, 205000]}
                             invert
                             step={1000}
-                            min={16000}
+                            min={40000}
                             max={250000}
                         />
-                        <RangeText>16 242</RangeText>
+                        <RangeText>40 тыс.</RangeText>
                     </SliderWrapper>
                     <InfoWrapper>
                         <SalaryWrapper>

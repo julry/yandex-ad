@@ -67,7 +67,7 @@ export const Form = (props) => {
             >
                 <MediumText>от 3 лет и более</MediumText>
             </RadioButton>
-            <Label>Сколько хочешь получать сейчас на руки? <Note>(руб)</Note></Label>
+            <Label>Укажи свои зарплатные ожидания <Note>(руб)</Note></Label>
             <InputStyled
                 placeholder={'50 000'}
                 value={salary}
