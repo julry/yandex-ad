@@ -70,7 +70,7 @@ export const KEYS_TO_TEXT = {
 };
 
 export const KEYS_TO_POSITION = {
-    93000: 'right: -4.8em; top: -8px;',
-    150000: 'right: -5em; top: -8px;',
-    205000: 'right: -5em; top: -8px;',
+    93000: 'right: -4.1em; top: -8px;',
+    150000: 'right: -4.5em; top: -8px;',
+    205000: 'right: -4.5em; top: -8px;',
 };

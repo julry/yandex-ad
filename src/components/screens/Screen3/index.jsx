@@ -26,7 +26,7 @@ const Slider = styled(ReactSlider)`
   width: 14px;
   height: 126vw;
   max-height: 473px;
-  margin: min(3.7vw, 14px) min(23.2vw, 87px) min(2.933vw, 11px) min(8vw, 30px);
+  margin: min(3.7vw, 14px) min(20vw, 75px) min(2.933vw, 11px) min(8vw, 30px);
   background: #FFFFFF;
   border-radius: 20px;
 
@@ -134,10 +134,9 @@ const Description = styled(Text)`
   z-index: 3;
   white-space: pre-line;
   transform: scale(-1, 1);
-  margin: min(4.5vw, 17px) min(6.3vw, 30px) min(5.3vw, 20px) min(5.3vw, 20px);
+  margin: min(4.5vw, 17px) min(6.6vw, 30px) min(5.3vw, 20px) min(5.3vw, 20px);
   
   @media screen and (min-width: 380px) {
-    max-width: 223px;
     font-size: 16px;
     line-height: 18px;
   }
@@ -158,12 +157,13 @@ const ButtonStyled = styled(Button)`
   right: 10%;
   z-index: 5;
   transform: scale(-1, 1);
+  padding: 10px 15px;
   
   @media screen and (max-width: 345px) {
     font-size: 12px;
   }
   @media screen and (max-width: 310px) {
-    padding: 10px 15px;
+    padding: 10px;
   }
 
   @media screen and (min-width: 800px) {
@@ -272,7 +272,7 @@ export const Screen3 = () => {
                             <ButtonStyled
                                 onClick={() => setModal({shown: true, type: MODAL_TYPES.form})}
                             >
-                                Хочу откликнуться
+                                Хочу в Яндекс Рекламу
                             </ButtonStyled>
                         </SkewedWrapperStyled>
                     </InfoWrapper>

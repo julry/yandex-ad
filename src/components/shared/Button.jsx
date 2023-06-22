@@ -14,7 +14,4 @@ const ButtonWrapper = styled.button`
   color: black;
 `;
 
-export const Button = (props) => {
-
-    return <ButtonWrapper { ...props }/>
-}
+export const Button = (props) => <ButtonWrapper { ...props }/>
