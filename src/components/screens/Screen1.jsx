@@ -66,7 +66,7 @@ export const Screen1 = () => {
             <Logo />
             <DescriptionWrapper>
                 <Description>
-                    <b>{'Вопрос зарплаты — вещь\nщекотливая, не правда ли?'}</b>
+                    <b>{'Вопрос дохода — вещь\nщекотливая, не правда ли?'}</b>
                     <br/>
                     <br/>
                     {
