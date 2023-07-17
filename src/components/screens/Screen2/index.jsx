@@ -119,7 +119,7 @@ export const Screen2 = () => {
             </Wrapper>
             {modal.shown && (
                 <ModalStyled
-                    btnText={'Хорошо'}
+                    btnText={'Хорошо!'}
                     onClose={() => setModal({shown: false, content: () => {}, btnStyle: ''})}
                     btnStyle={modal.btnStyle}
                     skewDeg={modal?.skewDeg}

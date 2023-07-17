@@ -155,6 +155,10 @@ const Description = styled(Text)`
   @media screen and (min-width: 640px) {
     margin-left: 30px;
   }
+
+  @media screen and (min-width: 640px) and (max-height: 700px){
+    margin-left: 45px;
+  }
 `;
 
 const ButtonStyled = styled(Button)`

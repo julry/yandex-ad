@@ -21,10 +21,6 @@ export const Text = styled.p`
   }
   
   @media screen and (min-width: 800px) and (max-height: 700px) {
-    font-size: 15px;
-  }
-
-  @media screen and (min-width: 800px) and (max-height: 600px) {
     font-size: 14px;
   }
 `;
