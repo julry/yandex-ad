@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ReactSlider from 'react-slider'
 import { FlexWrapper } from '../../shared/FlexWrapper';
 import arrow from '../../../static/images/arrowBlue.svg';
+import restart from '../../../static/images/restart.svg';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RulesModal } from './RulesModal';
 import { FormModal } from './FormModal';
@@ -53,7 +54,7 @@ const Thumb = styled.div`
 const Mark = styled.span`
   width: 100%;
   height: 3px;
-  background: ${({ k }) => k === 124000 ? '#D3DCEE' : '#919DB7'};
+  background: ${({ k }) => k === 114000 ? '#D3DCEE' : '#919DB7'};
 `;
 
 const SliderWrapper = styled.div`
@@ -107,11 +108,10 @@ const Salary = styled.p`
 
 const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-end;
-  padding-right: 24px;
+  padding-right: 25px;
 
   @media screen and (min-width: 380px) {
     & ${Text} {
-      font-size: 16px;
       max-width: 225px;
     }
   }
@@ -144,7 +144,6 @@ const Description = styled(Text)`
   margin: min(4.5vw, 17px) min(6.6vw, 30px) min(5.3vw, 20px) min(5.3vw, 20px);
   
   @media screen and (min-width: 380px) {
-    font-size: 16px;
     line-height: 18px;
   }
   
@@ -178,9 +177,21 @@ const ButtonStyled = styled(Button)`
   }
 `;
 
+const RestartButton = styled.button`
+  position: absolute;
+  top: min(24px, 6.9vw);
+  right: min(22px, 5.8vw);
+  outline: none;
+  border: none;
+  width: 31px;
+  height: 31px;
+  background: url(${restart}) no-repeat 0 0 / cover;
+  cursor: pointer;
+`;
+
 export const Screen3 = () => {
     const [modal, setModal] = useState({shown: true, type: MODAL_TYPES.rules});
-    const { salary } = useProgress();
+    const { salary, isFirstTry, restart } = useProgress();
     const [value, setValue] = useState();
     const [formShown, setFormShown] = useState(false);
     const [currentRange, setCurrentRange] = useState({});
@@ -218,7 +229,7 @@ export const Screen3 = () => {
         }
         if (valueRange) {
             if (valueRange.minM === 80 ) {
-                if (!$timerRef?.current && !modal?.shown && !formShown) {
+                if (!$timerRef?.current && !modal?.shown && !formShown && isFirstTry) {
                     $timerRef.current = setTimeout(() => {
                         setModal({shown: true, type: MODAL_TYPES.form});
                         setFormShown(true);
@@ -230,7 +241,7 @@ export const Screen3 = () => {
             }
             setCurrentRange(valueRange);
         }
-    }, [value, salary, modal.shown, formShown]);
+    }, [value, salary, modal.shown, formShown, isFirstTry]);
 
     return (
         <>
@@ -253,9 +264,9 @@ export const Screen3 = () => {
                             )}
                             orientation="vertical"
                             onChange={(v) => setValue(v)}
-                            marks={[93000, 124000, 150000, 205000]}
+                            marks={[93000, 114000, 150000, 205000]}
                             invert
-                            step={1000}
+                            step={100}
                             min={40000}
                             max={250000}
                         />
@@ -286,6 +297,7 @@ export const Screen3 = () => {
                         </SkewedWrapperStyled>
                     </InfoWrapper>
                 </Content>
+                <RestartButton onClick={restart}/>
             </Wrapper>
             {modal.shown && (modal.type === MODAL_TYPES.rules ?
                 <RulesModal onClose={handleCloseModal}/> : <FormModal onClose={handleCloseModal}/>

@@ -9,7 +9,8 @@ const INITIAL_PROGRESS = {
     name: INITIAL_NAME,
     experience: INITIAL_EXP,
     salary: INITIAL_SALARY,
-    id: ''
+    id: '',
+    isFirstTry: true,
 };
 
 export function useProgressInit() {
@@ -25,13 +26,19 @@ export function useProgressInit() {
     const next = () => {
         const nextScreenIndex = currentScreenIndex + 1;
         const canNext = nextScreenIndex <= screens.length - 1;
-        const nextScreen = screens[nextScreenIndex];
 
         if (canNext) {
-            if (nextScreen?.ref?.current) nextScreen.ref.current.scrollTop = 0;
             setCurrentScreenIndex(nextScreenIndex);
         }
     };
+
+    const restart = () => {
+        setCurrentScreenIndex(0);
+        setProgress({
+            ...INITIAL_PROGRESS,
+            isFirstTry: false,
+        });
+    }
 
     const updateProgress = (newProgress) => {
         setProgress(progress => ({...progress, ...newProgress}));
@@ -40,8 +47,10 @@ export function useProgressInit() {
     return {
         progress,
         salary: progress.salary,
+        isFirstTry: progress.isFirstTry,
         screen,
         next,
+        restart,
         updateProgress,
     };
 }

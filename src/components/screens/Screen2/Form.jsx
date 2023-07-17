@@ -3,6 +3,7 @@ import { Input } from '../../shared/Input';
 import { Label } from '../../shared/Label';
 import { RadioButton } from '../../shared/RadioButton';
 import { MediumText } from '../../shared/MediumText';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
   margin: 0 min(27.2vw, 102px) min(11.2vw, 42px) min(6.4vw, 24px);
@@ -41,6 +42,7 @@ const InputStyled = styled(Input)`
 `;
 
 export const Form = (props) => {
+    const [placeholder, setPlaceholder] = useState('50 000');
     const { salary, onChangeSalary, setExp } = props;
 
     return (
@@ -49,27 +51,36 @@ export const Form = (props) => {
             <RadioButton
                 type="radio"
                 name="exp"
-                onChange={() => setExp('менее года')}
+                onChange={() => {
+                    setExp('менее года');
+                    setPlaceholder('65 000');
+                }}
             >
                 <MediumText>менее года</MediumText>
             </RadioButton>
             <RadioButton
                 type="radio"
                 name="exp"
-                onChange={() => setExp('от 1 до 3 лет')}
+                onChange={() => {
+                    setExp('от 1 до 3 лет');
+                    setPlaceholder('80 000');
+                }}
             >
                 <MediumText>от 1 до 3 лет</MediumText>
             </RadioButton>
             <RadioButton
                 type="radio"
                 name="exp"
-                onChange={() => setExp('от 3 лет')}
+                onChange={() => {
+                    setExp('от 3 лет');
+                    setPlaceholder('100 000');
+                }}
             >
                 <MediumText>от 3 лет</MediumText>
             </RadioButton>
             <Label>Укажи свои ожидания совокупного дохода <Note>(руб. в мес.)</Note></Label>
             <InputStyled
-                placeholder={'50 000'}
+                placeholder={placeholder}
                 value={salary}
                 onChange={(e) => onChangeSalary(e.target.value)}
             />

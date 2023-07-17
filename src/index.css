@@ -19,6 +19,14 @@ code {
   box-sizing: border-box;
 }
 
-p, h1, h2, h3, span, button {
+p, h1, h2, h3, span, button, a {
   font-family: 'Yandex Sans Text', sans-serif;
+}
+
+a {
+  color: #153B7D;
+}
+
+a:visited {
+  color: #153B7D;
 }

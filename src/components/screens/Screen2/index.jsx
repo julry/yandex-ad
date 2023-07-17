@@ -49,7 +49,7 @@ const ModalStyled = styled(Modal)`
 `;
 
 export const Screen2 = () => {
-    const {next, updateProgress} = useProgress();
+    const {next, updateProgress, isFirstTry} = useProgress();
     const [modal, setModal] = useState({shown: false, content: () => {}, btnStyle: ''});
     const [experience, setExp] = useState('');
     const [salary, setSalary] = useState('');
@@ -86,7 +86,7 @@ export const Screen2 = () => {
             return;
         }
         const id = Math.floor(Math.random() * 1000 + 100) + '-' + Math.floor(Math.random() * 1000);
-        sendData({id, data: '', experience, name: '', salary});
+        if (isFirstTry) sendData({id, data: '', experience, name: '', salary});
         updateProgress({
             experience,
             salary: sal,

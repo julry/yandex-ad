@@ -204,7 +204,6 @@ export const FormModal = ({onClose}) => {
         <Modal
             btnText={'К вакансиям!'}
             btnStyle={'top: 106%; left: min(6.13vw, 23px);'}
-            onClose={() => {}}
             isClosing={isClosing}
         >
             <Content>
