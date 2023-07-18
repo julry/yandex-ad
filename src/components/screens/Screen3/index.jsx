@@ -12,6 +12,7 @@ import { KEYS_TO_POSITION, KEYS_TO_TEXT, MODAL_TYPES, ranges } from './screen3-c
 import { SkewedWrapper } from '../../shared/SkewedWrapper';
 import { Button } from '../../shared/Button';
 import { Text } from '../../shared/Text';
+import { reachMetrikaGoal } from '../../../utils/reachMetrikaGoal';
 
 const Wrapper = styled(FlexWrapper)`
   filter: ${({$isModalShown}) => $isModalShown ? 'blur(4px)' : 'none'};
@@ -194,11 +195,14 @@ const RestartButton = styled.button`
 `;
 
 export const Screen3 = () => {
-    const [modal, setModal] = useState({shown: true, type: MODAL_TYPES.rules});
     const { salary, isFirstTry, restart } = useProgress();
+
+    const [modal, setModal] = useState({shown: true, type: MODAL_TYPES.rules});
     const [value, setValue] = useState();
     const [formShown, setFormShown] = useState(false);
     const [currentRange, setCurrentRange] = useState({});
+    const [reachedMarks, setReachedMarks] = useState([]);
+
     const $timerRef = useRef();
 
     const handleCloseModal = () => {
@@ -232,6 +236,15 @@ export const Screen3 = () => {
             valueRange = ranges.find(range => salaryValue <= range.maxM && salaryValue >= range.minM);
         }
         if (valueRange) {
+            const metrikaRange = +value > 114000 && +value < 150000;
+            const needMetrika = reachedMarks
+                .filter(marks => (!metrikaRange && marks === valueRange.minM) || (metrikaRange && marks === '93'))
+                .length === 0;
+            if (!!value && isFirstTry && needMetrika) {
+                const metrikaValue = metrikaRange ? '93' : valueRange.minM;
+                setReachedMarks((prevMarks) => [...prevMarks, metrikaValue]);
+                reachMetrikaGoal('shift' + metrikaValue);
+            }
             if (valueRange.minM === 80 ) {
                 if (!$timerRef?.current && !modal?.shown && !formShown && isFirstTry) {
                     $timerRef.current = setTimeout(() => {
@@ -243,9 +256,9 @@ export const Screen3 = () => {
                  clearTimeout($timerRef.current);
                  $timerRef.current = null;
             }
-            setCurrentRange(valueRange);
+            if (valueRange.minM !== currentRange.minM) setCurrentRange(valueRange);
         }
-    }, [value, salary, modal.shown, formShown, isFirstTry]);
+    }, [value, salary, modal.shown, formShown, isFirstTry, reachedMarks]);
 
     return (
         <>

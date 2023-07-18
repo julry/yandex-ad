@@ -34,10 +34,12 @@ export function useProgressInit() {
 
     const restart = () => {
         setCurrentScreenIndex(0);
-        setProgress({
-            ...INITIAL_PROGRESS,
+        setProgress((prevProgress) => ({
+            ...prevProgress,
+            experience: INITIAL_EXP,
+            salary: INITIAL_SALARY,
             isFirstTry: false,
-        });
+        }));
     }
 
     const updateProgress = (newProgress) => {

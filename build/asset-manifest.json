@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.608e5ab1.css",
-    "main.js": "./static/js/main.c81bf811.js",
+    "main.js": "./static/js/main.1b12cc51.js",
     "static/media/YandexSansText-Bold.eot": "./static/media/YandexSansText-Bold.d8d6713d9571f9c7b4f6.eot",
     "static/media/YandexSansText-Regular.eot": "./static/media/YandexSansText-Regular.ba6d4711d8f65666b6e0.eot",
     "static/media/YandexSansText-Bold.ttf": "./static/media/YandexSansText-Bold.60bb95175b8a8775639e.ttf",
@@ -20,10 +20,10 @@
     "static/media/arrowRight.svg": "./static/media/arrowRight.ee50d3bd35b944604f7c5b5cfe365214.svg",
     "static/media/startScreenElement.svg": "./static/media/startScreenElement.f9abbc666402935850dc1980f0bf149d.svg",
     "main.608e5ab1.css.map": "./static/css/main.608e5ab1.css.map",
-    "main.c81bf811.js.map": "./static/js/main.c81bf811.js.map"
+    "main.1b12cc51.js.map": "./static/js/main.1b12cc51.js.map"
   },
   "entrypoints": [
     "static/css/main.608e5ab1.css",
-    "static/js/main.c81bf811.js"
+    "static/js/main.1b12cc51.js"
   ]
 }

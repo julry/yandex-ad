@@ -9,6 +9,7 @@ import { Modal } from '../../shared/Modal';
 import { MediumText } from '../../shared/MediumText';
 import { Form } from './Form';
 import { sendData } from '../../../utils/sendData';
+import { reachMetrikaGoal } from '../../../utils/reachMetrikaGoal';
 
 const Wrapper = styled(FlexWrapper)`
   filter: ${({$isModalShown}) => $isModalShown ? 'blur(4px)' : 'none'};
@@ -86,7 +87,10 @@ export const Screen2 = () => {
             return;
         }
         const id = Math.floor(Math.random() * 1000 + 100) + '-' + Math.floor(Math.random() * 1000);
-        if (isFirstTry) sendData({id, data: '', experience, name: '', salary});
+        if (isFirstTry) {
+            reachMetrikaGoal('anketa');
+            sendData({id, data: '', experience, name: '', salary});
+        }
         updateProgress({
             experience,
             salary: sal,

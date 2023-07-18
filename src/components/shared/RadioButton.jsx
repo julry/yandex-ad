@@ -58,13 +58,14 @@ const RadioButtonLabel = styled.label`
 `;
 
 
-export const RadioButton = ({ className, type, name, value, onChange, children, disabled }) => (
+export const RadioButton = ({ className, type, name, value, onChange, children, checked, disabled }) => (
     <RadioButtonLabel className={className}>
         <InputRadioButton
             type={type}
             name={name}
             value={value}
             disabled={disabled}
+            checked={checked}
             onChange={onChange}
         />
         <RadioIconStyled/>

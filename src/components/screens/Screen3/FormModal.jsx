@@ -10,6 +10,7 @@ import { RadioButton } from '../../shared/RadioButton';
 import { Text } from '../../shared/Text';
 import { sendData } from '../../../utils/sendData';
 import { useProgress } from '../../../hooks/useProgress';
+import { reachMetrikaGoal } from '../../../utils/reachMetrikaGoal';
 
 const Content = styled.div`
   white-space: pre-line;
@@ -173,20 +174,27 @@ const Link = styled.a`
 `;
 
 export const FormModal = ({onClose}) => {
+    const { progress, updateProgress } = useProgress();
+    const { salary, experience, id } = progress;
     const [name, setName] = useState('');
     const [data, setData] = useState('');
     const [isClosing, setIsClosing] = useState(false);
-    const { progress } = useProgress();
-    const { salary, experience, id } = progress;
     const [isSending, setIsSending] = useState(false);
-    const [isSend, setIsSend] = useState(false);
-    const [isAgreed, setIsAgreed] = useState(false);
+    const [isSend, setIsSend] = useState(!!progress?.name && !!progress?.data);
+    const [isAgreed, setIsAgreed] = useState(!!progress?.name && !!progress?.data);
 
     const handleSendData = async () => {
         setIsSending(true);
         const result = await sendData({id, data, experience, name, salary});
         setIsSending(false);
-        if (!result.error) setIsSend(true);
+        if (!result.error) {
+            updateProgress({
+                name,
+                data,
+            });
+            reachMetrikaGoal('links');
+            setIsSend(true);
+        }
     }
 
     const handleClose = () => {
@@ -201,6 +209,7 @@ export const FormModal = ({onClose}) => {
     };
 
     const handleOpenHref = () => {
+        reachMetrikaGoal('jobs');
         window.open('https://yandex.ru/jobs/services/advertising', '_blank');
     }
 
@@ -245,6 +254,7 @@ export const FormModal = ({onClose}) => {
                 <RadioButtonStyled
                     type="checkbox"
                     value={isAgreed}
+                    checked={isAgreed}
                     onChange={handleAgree}
                     disabled={isSend}
                 >

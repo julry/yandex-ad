@@ -8,6 +8,7 @@ import { FlexWrapper } from '../shared/FlexWrapper';
 import { SkewedWrapper } from '../shared/SkewedWrapper';
 import { Logo } from '../shared/Logo';
 import { MediumText } from '../shared/MediumText';
+import { reachMetrikaGoal } from '../../utils/reachMetrikaGoal';
 
 const Wrapper = styled(FlexWrapper)`
   position: relative;
@@ -60,7 +61,13 @@ const ArrowBottom = styled.div`
 `;
 
 export const Screen1 = () => {
-    const { next } = useProgress();
+    const { next, isFirstTry } = useProgress();
+
+    const handleClick = () => {
+        if (isFirstTry) reachMetrikaGoal('start');
+        next();
+    };
+
     return (
         <Wrapper>
             <Logo />
@@ -77,7 +84,7 @@ export const Screen1 = () => {
                     }
                 </Description>
                 <ButtonWrapper>
-                    <Button onClick={next}>Ого, давайте!</Button>
+                    <Button onClick={handleClick}>Ого, давайте!</Button>
                 </ButtonWrapper>
             </DescriptionWrapper>
             <ArrowTop />
