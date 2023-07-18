@@ -38,13 +38,13 @@ const Slider = styled(ReactSlider)`
 `;
 
 const ThumbWrapper = styled.div`
-  padding: 0 15px;
-  left: -22px;
+  padding: 0 25px;
+  left: -32px;
   outline: none;
 `;
 
 const Thumb = styled.div`
-  height: 7px;
+  height: 13px;
   width: 28px;
   background: #FFEC42;
   background: linear-gradient(170.39deg, #FFB800 -15.52%, #FFEC42 108.44%);

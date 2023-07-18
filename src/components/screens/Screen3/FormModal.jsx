@@ -200,10 +200,15 @@ export const FormModal = ({onClose}) => {
         setIsAgreed(prevAgreed => !prevAgreed);
     };
 
+    const handleOpenHref = () => {
+        window.open('https://yandex.ru/jobs/services/advertising', '_blank');
+    }
+
     return (
         <Modal
             btnText={'К вакансиям!'}
             btnStyle={'top: 106%; left: min(6.13vw, 23px);'}
+            onClick={handleOpenHref}
             isClosing={isClosing}
         >
             <Content>

@@ -77,6 +77,7 @@ export const Modal = (props) => {
     const [isClosing, setIsClosing] = useState(false);
 
     const handleClick = () => {
+        if (props.onClick) props.onClick?.();
         if (!props.onClose) return;
         setIsClosing(true);
         setTimeout(() => props.onClose(), 350);
