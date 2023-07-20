@@ -210,7 +210,7 @@ export const FormModal = ({onClose}) => {
 
     const handleOpenHref = () => {
         reachMetrikaGoal('jobs');
-        window.open('https://yandex.ru/jobs/services/advertising', '_blank');
+        window.open('https://yandex.ru/jobs/pages/advertising-ekb', '_blank');
     }
 
     return (
