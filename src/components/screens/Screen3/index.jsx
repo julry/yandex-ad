@@ -236,14 +236,12 @@ export const Screen3 = () => {
             valueRange = ranges.find(range => salaryValue <= range.maxM && salaryValue >= range.minM);
         }
         if (valueRange) {
-            const metrikaRange = +value > 114000 && +value < 150000;
             const needMetrika = reachedMarks
-                .filter(marks => (!metrikaRange && marks === valueRange.minM) || (metrikaRange && marks === '93'))
+                .filter(marks => marks === valueRange.minM)
                 .length === 0;
             if (!!value && isFirstTry && needMetrika) {
-                const metrikaValue = metrikaRange ? '93' : valueRange.minM;
-                setReachedMarks((prevMarks) => [...prevMarks, metrikaValue]);
-                reachMetrikaGoal('shift' + metrikaValue);
+                setReachedMarks((prevMarks) => [...prevMarks, valueRange.minM]);
+                reachMetrikaGoal('shift' + valueRange.minM);
             }
             if (valueRange.minM === 80 ) {
                 if (!$timerRef?.current && !modal?.shown && !formShown && isFirstTry) {
@@ -258,7 +256,7 @@ export const Screen3 = () => {
             }
             if (valueRange.minM !== currentRange.minM) setCurrentRange(valueRange);
         }
-    }, [value, salary, modal.shown, formShown, isFirstTry, reachedMarks]);
+    }, [value, salary, modal.shown, formShown, isFirstTry, reachedMarks, currentRange.minM]);
 
     return (
         <>
