@@ -1,3 +1,3 @@
-export const reachMetrikaGoal = (goal) => {
-    // console.log(goal);
+export const reachMetrikaGoal = (goalName) => {
+    window.ym && window.ym(window.ymId, 'reachGoal', goalName);
 }

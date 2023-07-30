@@ -9,17 +9,12 @@ const INITIAL_PROGRESS = {
     name: INITIAL_NAME,
     experience: INITIAL_EXP,
     salary: INITIAL_SALARY,
-    id: '',
+    id: undefined,
     isFirstTry: true,
 };
 
 export function useProgressInit() {
-    /////////////////// for development ////////////////////////////////////
-    const urlParams = new URLSearchParams(window.location.search);
-    const screenParam = urlParams.get('screen');
-    ////////////////////////////////////////////////////////////////////////
-
-    const [currentScreenIndex, setCurrentScreenIndex] = useState(+screenParam || 0);
+    const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
     const [progress, setProgress] = useState(INITIAL_PROGRESS);
     const screen = screens[currentScreenIndex];
 

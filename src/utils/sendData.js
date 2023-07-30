@@ -1,9 +1,9 @@
-const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScY8yIHaHKmk-HQT4r2KisvDnI-hPob7UPZKDls4R44o6Gb4A/formResponse';
-const USER_ID = 'entry.387559909';
-const EXPERIENCE_ID = 'entry.1162322638';
-const SALARY_ID = 'entry.1019040594';
-const NAME_ID = 'entry.2929727';
-const DATA_ID = 'entry.294863456';
+const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSep8GQE3uCsfPd13UZjvY9glTgoIkgfrn9LdmueZp-Cs-p9RQ/formResponse';
+const USER_ID = 'entry.1133224556';
+const EXPERIENCE_ID = 'entry.1634560356';
+const SALARY_ID = 'entry.989687674';
+const NAME_ID = 'entry.1243986859';
+const DATA_ID = 'entry.2075097055';
 
 export const sendData = ({ id, salary, experience, name, data }) => {
     const formData = new FormData();
